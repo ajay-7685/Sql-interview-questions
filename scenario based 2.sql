@@ -1,3 +1,37 @@
+-- Table for people information
+CREATE TABLE Persons (
+    PersonID INT PRIMARY KEY,
+    Name VARCHAR(50),
+    Email VARCHAR(100),
+    Score INT
+);
+
+INSERT INTO Persons (PersonID, Name, Email, Score) VALUES
+(1, 'Alice', 'alice2018@hotmail.com', 88),
+(2, 'Bob', 'bob2018@hotmail.com', 11),
+(3, 'Davis', 'davis2018@hotmail.com', 27),
+(4, 'Tara', 'tara2018@hotmail.com', 45),
+(5, 'John', 'john2018@hotmail.com', 63);
+
+-- Table for friendships
+CREATE TABLE Friends (
+    PersonID INT,
+    FriendID INT,
+    FOREIGN KEY (PersonID) REFERENCES Persons(PersonID),
+    FOREIGN KEY (FriendID) REFERENCES Persons(PersonID)
+);
+
+INSERT INTO Friends (PersonID, FriendID) VALUES
+(1, 2),
+(2, 1),
+(2, 3),
+(3, 1),
+(3, 4),
+(4, 5),
+(4, 3),
+(5, 4);
+
+
 -- Step 1: Create a CTE to calculate each person's total friends' score and number of friends
 WITH score_details AS (
     SELECT 
@@ -20,3 +54,4 @@ SELECT
 FROM person p
 INNER JOIN score_details s 
     ON p.personid = s.personid;  -- Match the aggregated friend score data to the correct person
+
