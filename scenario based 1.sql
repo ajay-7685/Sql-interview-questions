@@ -1,3 +1,20 @@
+CREATE TABLE visits (
+    name VARCHAR(10),
+    address VARCHAR(100),
+    email VARCHAR(100),
+    floor INT,
+    resources VARCHAR(100)
+);
+INSERT INTO visits (name, address, email, floor, resources) VALUES
+('A', 'Bangalore', 'A@gmail.com', 1, 'CPU'),
+('A', 'Bangalore', 'A1@gmail.com', 1, 'CPU'),
+('A', 'Bangalore', 'A2@gmail.com', 2, 'DESKTOP'),
+('B', 'Bangalore', 'B@gmail.com', 2, 'DESKTOP'),
+('B', 'Bangalore', 'B1@gmail.com', 2, 'DESKTOP'),
+('B', 'Bangalore', 'B2@gmail.com', 1, 'MONITOR');
+
+
+
 -- Step 1: Get distinct combinations of name and resources from the visits table
 WITH distinct_resources AS (
     SELECT DISTINCT name, resources FROM visits
@@ -44,3 +61,4 @@ FROM floor_visit fv
 JOIN total_visits tv ON fv.name = tv.name
 JOIN agg_resources ar ON fv.name = ar.name
 WHERE fv.rn = 1; -- Only include the most visited floor (rank = 1) for each person
+
